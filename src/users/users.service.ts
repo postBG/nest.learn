@@ -1,9 +1,11 @@
 import * as uuid from 'uuid';
 import { Injectable } from '@nestjs/common';
-import { single } from 'rxjs';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class UsersService {
+  constructor(private emailService: EmailService) {}
+
   async createUser(name: string, email: string, password: string) {
     await this.checkUserExists(email);
 
