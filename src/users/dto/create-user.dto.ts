@@ -5,8 +5,10 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateUserDto {
+  @Transform((params) => params.value.trim())
   @IsString()
   @MinLength(2)
   @MaxLength(30)

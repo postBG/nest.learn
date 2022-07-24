@@ -25,6 +25,7 @@ export class UsersService {
     password: string,
     signupVerifyToken: string,
   ) {
+    console.log(name, email, password, signupVerifyToken);
     return;
   }
 
