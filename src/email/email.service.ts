@@ -43,6 +43,10 @@ export class EmailService {
         </form>`,
     };
 
-    return await this.transporter.sendMail(mailOptions);
+    console.log({
+      url,
+      signupVerifyToken,
+    });
+    // return await this.transporter.sendMail(mailOptions);
   }
 }
