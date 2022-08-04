@@ -5,6 +5,7 @@ import emailConfig from './config/emailConfig';
 import { validationSchema } from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 import authConfig from './config/authConfig';
 
 @Module({
@@ -29,5 +30,6 @@ import authConfig from './config/authConfig';
     AuthModule,
   ],
   providers: [],
+  controllers: [AppController],
 })
 export class AppModule {}
