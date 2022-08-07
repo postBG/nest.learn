@@ -1,21 +1,30 @@
 import {
-  Body, Controller, Get, Headers, Inject, InternalServerErrorException, LoggerService, Param, Post, Query, UseGuards
-} from "@nestjs/common";
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Inject,
+  InternalServerErrorException,
+  Logger,
+  LoggerService,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth.guard';
-import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private authService: AuthService,
-    @Inject(WINSTON_MODULE_NEST_PROVIDER)
-    private readonly logger: LoggerService,
+    @Inject(Logger) private readonly logger: LoggerService,
   ) {}
 
   @Post()
