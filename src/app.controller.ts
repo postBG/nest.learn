@@ -1,15 +1,26 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
-import { User } from './utils/decorators/user';
+import { Controller, Get, UseGuards, ValidationPipe } from '@nestjs/common';
+import { UserData } from './utils/decorators/user';
 import { AuthGuard } from './auth.guard';
+import { IsString } from 'class-validator';
 
-interface User {
-  userId: string;
-  email: string;
+class UserEntity {
+  @IsString() userId: string;
+
+  @IsString() email: string;
 }
 
 @Controller()
 export class AppController {
-  @UseGuards(AuthGuard) @Get() getHello(@User() user: User) {
+  @UseGuards(AuthGuard) @Get() getHello(
+    @UserData(new ValidationPipe({ validateCustomDecorators: true }))
+    user: UserEntity,
+  ) {
     console.log(user);
+  }
+
+  @UseGuards(AuthGuard) @Get('/user-id') getUsername(
+    @UserData('userId') userId: string,
+  ) {
+    console.log(userId);
   }
 }
