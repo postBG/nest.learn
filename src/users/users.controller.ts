@@ -4,7 +4,6 @@ import {
   Get,
   Headers,
   Inject,
-  InternalServerErrorException,
   Logger,
   LoggerService,
   Param,
@@ -18,6 +17,7 @@ import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth.guard';
+import { InvalidClassException } from '@nestjs/core/errors/exceptions/invalid-class.exception';
 
 @Controller('users')
 export class UsersController {
@@ -61,14 +61,6 @@ export class UsersController {
   }
 
   private printLoggerServiceLog(dto) {
-    try {
-      throw new InternalServerErrorException('test');
-    } catch (e) {
-      this.logger.error('error: ' + JSON.stringify(dto), e.stack);
-    }
-    this.logger.warn('warn: ' + JSON.stringify(dto));
-    this.logger.log('log: ' + JSON.stringify(dto));
-    this.logger.verbose('verbose: ' + JSON.stringify(dto));
     this.logger.debug('debug: ' + JSON.stringify(dto));
   }
 }
