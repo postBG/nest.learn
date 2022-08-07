@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import authConfig from './config/authConfig';
-import winston from 'winston';
+import * as winston from 'winston';
 import {
   utilities as nestWinstonModuleUtilities,
   WinstonModule,
