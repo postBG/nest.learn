@@ -14,18 +14,18 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
-import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth.guard';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateUserCommand } from './command/create-user.command';
 import { UsersService } from './users.service';
+import { GetUserInfoQuery } from './query/get-user-info.query';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private usersService: UsersService,
     private commandBus: CommandBus,
-    private authService: AuthService,
+    private queryBus: QueryBus,
     @Inject(Logger) private readonly logger: LoggerService,
   ) {}
 
@@ -58,11 +58,9 @@ export class UsersController {
     @Headers() headers: any,
     @Param('id') userId: string,
   ): Promise<UserInfo> {
-    const jwtString = headers.authorization.split('Bearer ')[1];
+    const getUserInfoQuery = new GetUserInfoQuery(userId);
 
-    this.authService.verify(jwtString);
-
-    return this.usersService.getUserInfo(userId);
+    return this.queryBus.execute(getUserInfoQuery);
   }
 
   private printLoggerServiceLog(dto) {
