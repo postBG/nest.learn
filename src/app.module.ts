@@ -8,7 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { ExceptionModule } from './exception/exception.module';
 import { LoggingModule } from './logging/logging.module';
+import { HealthCheckController } from './health-check/health-check.controller';
 import authConfig from './config/authConfig';
+import { TerminusModule } from '@nestjs/terminus';
 
 @Module({
   imports: [
@@ -32,8 +34,9 @@ import authConfig from './config/authConfig';
     AuthModule,
     ExceptionModule,
     LoggingModule,
+    TerminusModule,
   ],
   providers: [],
-  controllers: [AppController],
+  controllers: [AppController, HealthCheckController],
 })
 export class AppModule {}
