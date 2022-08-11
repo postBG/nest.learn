@@ -11,18 +11,20 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth.guard';
-import { InvalidClassException } from '@nestjs/core/errors/exceptions/invalid-class.exception';
+import { CommandBus } from '@nestjs/cqrs';
+import { CreateUserCommand } from './command/create-user.command';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(
-    private readonly usersService: UsersService,
+    private usersService: UsersService,
+    private commandBus: CommandBus,
     private authService: AuthService,
     @Inject(Logger) private readonly logger: LoggerService,
   ) {}
@@ -30,7 +32,10 @@ export class UsersController {
   @Post()
   async create(@Body() dto: CreateUserDto): Promise<void> {
     const { name, email, password } = dto;
-    return this.usersService.createUser(name, email, password);
+
+    const command = new CreateUserCommand(name, email, password);
+
+    return this.commandBus.execute(command);
   }
 
   @Post('/email-verify')
