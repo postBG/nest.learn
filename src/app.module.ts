@@ -12,6 +12,7 @@ import { HealthCheckController } from './health-check/health-check.controller';
 import authConfig from './config/authConfig';
 import { TerminusModule } from '@nestjs/terminus';
 import { HttpModule } from '@nestjs/axios';
+import { DogHealthIndicator } from './health-check/dog.health';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { HttpModule } from '@nestjs/axios';
     TerminusModule,
     HttpModule,
   ],
-  providers: [],
+  providers: [DogHealthIndicator],
   controllers: [AppController, HealthCheckController],
 })
 export class AppModule {}
