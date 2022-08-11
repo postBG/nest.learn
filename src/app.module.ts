@@ -11,6 +11,7 @@ import { LoggingModule } from './logging/logging.module';
 import { HealthCheckController } from './health-check/health-check.controller';
 import authConfig from './config/authConfig';
 import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { TerminusModule } from '@nestjs/terminus';
     ExceptionModule,
     LoggingModule,
     TerminusModule,
+    HttpModule,
   ],
   providers: [],
   controllers: [AppController, HealthCheckController],
