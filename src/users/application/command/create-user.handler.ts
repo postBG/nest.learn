@@ -4,7 +4,7 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
-import { UserEntity } from '../../entity/user.entity';
+import { UserEntity } from '../../infra/db/entity/user.entity';
 import { CreateUserCommand } from './create-user.command';
 
 @Injectable()

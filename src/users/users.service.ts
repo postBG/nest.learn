@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { EmailService } from '../email/email.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './entity/user.entity';
+import { UserEntity } from './infra/db/entity/user.entity';
 import { Repository } from 'typeorm';
 import { ulid } from 'ulid';
 import { AuthService } from '../auth/auth.service';
