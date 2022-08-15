@@ -16,9 +16,9 @@ import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { AuthGuard } from '../auth.guard';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateUserCommand } from './command/create-user.command';
+import { CreateUserCommand } from './application/command/create-user.command';
 import { UsersService } from './users.service';
-import { GetUserInfoQuery } from './query/get-user-info.query';
+import { GetUserInfoQuery } from './application/query/get-user-info.query';
 
 @Controller('users')
 export class UsersController {

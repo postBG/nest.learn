@@ -6,9 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entity/user.entity';
 import { AuthModule } from '../auth/auth.module';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CreateUserHandler } from './command/create-user.handler';
-import { UserEventsHandler } from './event/user-events.handler';
-import { GetUserInfoQueryHandler } from './query/get-user-info.handler';
+import { CreateUserHandler } from './application/command/create-user.handler';
+import { UserEventsHandler } from './application/event/user-events.handler';
+import { GetUserInfoQueryHandler } from './application/query/get-user-info.handler';
 
 @Module({
   imports: [
