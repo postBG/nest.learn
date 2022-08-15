@@ -9,6 +9,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateUserHandler } from './application/command/create-user.handler';
 import { UserEventsHandler } from './application/event/user-events.handler';
 import { GetUserInfoQueryHandler } from './application/query/get-user-info.handler';
+import { UserRepository } from './infra/db/repository/UserRepository';
 
 @Module({
   imports: [
@@ -24,6 +25,10 @@ import { GetUserInfoQueryHandler } from './application/query/get-user-info.handl
     CreateUserHandler,
     UserEventsHandler,
     GetUserInfoQueryHandler,
+    {
+      provide: 'UserRepository',
+      useClass: UserRepository,
+    },
   ],
 })
 export class UsersModule {}
