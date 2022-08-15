@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { CreateUserCommand } from './create-user.command';
-import { UserCreatedEvent } from '../event/user-created.event';
+import { UserCreatedEvent } from '../domain/user-created.event';
 import { TestEvent } from '../event/test.event';
 
 @Injectable()
