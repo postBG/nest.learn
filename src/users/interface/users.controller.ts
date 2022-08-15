@@ -14,11 +14,11 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { UserLoginDto } from './dto/user-login.dto';
-import { AuthGuard } from '../auth.guard';
+import { AuthGuard } from '../../auth.guard';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateUserCommand } from './application/command/create-user.command';
-import { UsersService } from './users.service';
-import { GetUserInfoQuery } from './application/query/get-user-info.query';
+import { CreateUserCommand } from '../application/command/create-user.command';
+import { UsersService } from '../users.service';
+import { GetUserInfoQuery } from '../application/query/get-user-info.query';
 
 @Controller('users')
 export class UsersController {
