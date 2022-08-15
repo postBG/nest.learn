@@ -10,6 +10,21 @@ import { CreateUserHandler } from './application/command/create-user.handler';
 import { UserEventsHandler } from './application/event/user-events.handler';
 import { GetUserInfoQueryHandler } from './application/query/get-user-info.handler';
 import { UserRepository } from './infra/db/repository/UserRepository';
+import { EmailService } from './infra/adapter/email.service';
+import { UserFactory } from './domain/user.factory';
+
+const eventHandlers = [UserEventsHandler];
+const factories = [UserFactory];
+const repositories = [
+  {
+    provide: 'UserRepository',
+    useClass: UserRepository,
+  },
+  {
+    provide: 'EmailService',
+    useClass: EmailService,
+  },
+];
 
 @Module({
   imports: [
@@ -20,15 +35,13 @@ import { UserRepository } from './infra/db/repository/UserRepository';
   ],
   controllers: [UsersController],
   providers: [
+    ...factories,
     UsersService,
     Logger,
     CreateUserHandler,
-    UserEventsHandler,
     GetUserInfoQueryHandler,
-    {
-      provide: 'UserRepository',
-      useClass: UserRepository,
-    },
+    ...eventHandlers,
+    ...repositories,
   ],
 })
 export class UsersModule {}
